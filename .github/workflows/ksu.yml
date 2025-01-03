@@ -36,11 +36,12 @@ jobs:
           other-gcc64-url: https://github.com/pomelohan/linux_aarch64-elf-gcc
           other-gcc64-branch: master          
           ksu: true
-          ksu-version: next
+          ksu-version: next-susfs-4.9
           ksu-other: true
-          ksu-url: https://github.com/rifsxd/KernelSU-Next
-          android-version: 12
-          aosp-clang-version: r416183b
+          ksu-url: https://github.com/rifsxd/KernelSU
+          ksu_susfs-url: https://gitlab.com/simonpunk/susfs4ksu
+          ksu_susfs-branch: kernel-4.9
+          ksu_susfs-version: kernel-4.9
           disable-lto: true
           disable_cc_werror: true
           lxc: true
