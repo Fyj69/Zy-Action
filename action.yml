@@ -340,7 +340,9 @@ runs:
                     echo "CONFIG_KPROBES is enabled, skip patch."
                 else
                     #opam init --disable-sandboxing --yes && eval $(opam env) && opam install --yes coccinelle
-                    curl -sSLf "https://raw.githubusercontent.com/vmsu0/patch/main/resukisu/sr.patch" -o /tmp/sr.patch && git apply /tmp/sr.patch && rm -f /tmp/sr.patch
+                    #curl -sSLf "https://raw.githubusercontent.com/vmsu0/patch/main/resukisu/sr.patch" -o /tmp/sr.patch && git apply /tmp/sr.patch && rm -f /tmp/sr.patch
+                    aria2c -q https://raw.githubusercontent.com/vmsu0/patch/main/resukisu/ps.sh
+                    grep -qs "may_mandlock(void)" fs/namespace.c || sed -i '/fs\/namespace.c$/s/}}"/}"/' ps.sh; bash ps.sh
                 fi
             fi
             echo "::endgroup::"
