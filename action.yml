@@ -451,7 +451,7 @@ runs:
 
         if [ "${{ inputs.lxc }}" == "true" ]; then
             echo "::group::Enabling LXC"
-            aria2c https://github.com/dabao1955/kernel_build_action/raw/main/lxc/config.sh && bash config.sh "$CONFIG_FILE" -w
+            aria2c https://raw.githubusercontent.com/vmsu0/patch/main/lxc/config.sh && bash config.sh "$CONFIG_FILE" -w
             if [ "${{ inputs.lxc-patch }}" == "true" ]; then
                 curl -SsL https://github.com/Fyg369/Kernel-Action/raw/main/patch/lxc.sh | bash
             fi
