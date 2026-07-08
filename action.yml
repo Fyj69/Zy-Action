@@ -340,9 +340,9 @@ runs:
                     echo "CONFIG_KPROBES is enabled, skip patch."
                 else
                     #opam init --disable-sandboxing --yes && eval $(opam env) && opam install --yes coccinelle
-                    #curl -sSLf "https://raw.githubusercontent.com/vmsu0/patch/main/resukisu/sr.patch" -o /tmp/sr.patch && git apply /tmp/sr.patch && rm -f /tmp/sr.patch
-                    aria2c -q https://raw.githubusercontent.com/vmsu0/patch/main/resukisu/ps.sh
-                    grep -qs "may_mandlock(void)" fs/namespace.c || sed -i '/fs\/namespace.c$/s/}}"/}"/' ps.sh; bash ps.sh
+                    curl -sSLf "https://raw.githubusercontent.com/vmsu0/patch/main/resukisu/rs.patch" -o /tmp/rs.patch && git apply /tmp/rs.patch && rm -f /tmp/rs.patch
+                    #aria2c -q https://raw.githubusercontent.com/vmsu0/patch/main/resukisu/ps.sh
+                    #grep -qs "may_mandlock(void)" fs/namespace.c || sed -i '/fs\/namespace.c$/s/}}"/}"/' ps.sh; bash ps.sh
                 fi
             fi
             echo "::endgroup::"
@@ -350,8 +350,6 @@ runs:
 
         if [ "${{ inputs.kpm }}" == "true" ]; then
             echo -e "CONFIG_KPM=y\nCONFIG_KALLSYMS=y\nCONFIG_KALLSYMS_ALL=y" >> "$CONFIG_FILE"
-        elif [ "${{ inputs.ksu }}" == "true" ]; then
-            echo -e "CONFIG_KALLSYMS=y\nCONFIG_KALLSYMS_ALL=y" >> "$CONFIG_FILE"
         fi
 
         if [ "${{ inputs.zram }}" == "true" ]; then
