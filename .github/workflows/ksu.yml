@@ -28,9 +28,9 @@ jobs:
           android-version: 12
           aosp-clang-version: r416183b
           #extra-cmd: KCFLAGS="-std=gnu99"
-          #ksu: true
+          ksu: true
           ksu-version: main
-          #ksu-other: true
+          ksu-other: true
           ksu-url: https://github.com/ReSukiSU/ReSukiSU
           lxc: true
           lxc-patch: true
