@@ -341,6 +341,7 @@ runs:
                 else
                     #opam init --disable-sandboxing --yes && eval $(opam env) && opam install --yes coccinelle
                     curl -sSLf "https://raw.githubusercontent.com/vmsu0/patch/main/resukisu/rs.patch" -o /tmp/rs.patch && git apply /tmp/rs.patch && rm -f /tmp/rs.patch
+                    sed -i '/ksu_for_each_lsm_entry(hp, &security_hook_heads.setprocattr, list)/,/goto out;/ s/if (strcmp("selinux", hp->lsm))/if (1)/' KernelSU/kernel/feature/selinux_hide.c
                     #aria2c -q https://raw.githubusercontent.com/vmsu0/patch/main/resukisu/ps.sh
                     #grep -qs "may_mandlock(void)" fs/namespace.c || sed -i '/fs\/namespace.c$/s/}}"/}"/' ps.sh; bash ps.sh
                 fi
