@@ -29,7 +29,7 @@ jobs:
           aosp-clang-version: r416183b
           #extra-cmd: KCFLAGS="-std=gnu99"
           ksu: true
-          ksu-version: 5c23fe5
+          ksu-version: 52a1ab1
           ksu-other: true
           ksu-url: https://github.com/ReSukiSU/ReSukiSU
           lxc: true
