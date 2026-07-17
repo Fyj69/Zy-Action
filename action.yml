@@ -604,6 +604,18 @@ runs:
         if-no-files-found: error
         overwrite: true
 
+    - id: upload-debug
+      if: inputs.release == 'false'
+      uses: actions/upload-artifact@v6
+      with:
+        name: kernel-debug-files
+        path: |
+          kernel/${{ inputs.kernel-dir }}/out/vmlinux
+          kernel/${{ inputs.kernel-dir }}/out/System.map
+          kernel/${{ inputs.kernel-dir }}/out/.config
+        if-no-files-found: error
+        overwrite: true
+
     - id: release
       if: inputs.release == 'true'
       uses: softprops/action-gh-release@v2
