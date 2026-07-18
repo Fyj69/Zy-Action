@@ -343,7 +343,7 @@ runs:
                     #curl -sSLf "https://raw.githubusercontent.com/vmsu0/patch/main/resukisu/rs.patch" -o /tmp/rs.patch && git apply /tmp/rs.patch && rm -f /tmp/rs.patch
                     aria2c -q https://raw.githubusercontent.com/vmsu0/patch/main/resukisu/ps.sh
                     grep -qs "may_mandlock(void)" fs/namespace.c || sed -i '/fs\/namespace.c$/s/}}"/}"/' ps.sh; bash ps.sh
-                    sed -i 's/# CONFIG_DEBUG_BUGVERBOSE is not set/CONFIG_DEBUG_BUGVERBOSE=y/' $CONFIG_FILE"
+                    sed -i 's/# CONFIG_DEBUG_BUGVERBOSE is not set/CONFIG_DEBUG_BUGVERBOSE=y/' "$CONFIG_FILE"
                 fi
             fi
             echo "::endgroup::"
