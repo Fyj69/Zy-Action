@@ -343,9 +343,6 @@ runs:
                     #curl -sSLf "https://raw.githubusercontent.com/vmsu0/patch/main/resukisu/rs.patch" -o /tmp/rs.patch && git apply /tmp/rs.patch && rm -f /tmp/rs.patch
                     aria2c -q https://raw.githubusercontent.com/vmsu0/patch/main/resukisu/ps.sh
                     grep -qs "may_mandlock(void)" fs/namespace.c || sed -i '/fs\/namespace.c$/s/}}"/}"/' ps.sh; bash ps.sh
-                    sed -i 's/# CONFIG_DEBUG_BUGVERBOSE is not set/CONFIG_DEBUG_BUGVERBOSE=y/' "$CONFIG_FILE"
-                    perl -0pi -e 's/pr_err\("save_allow_list create file failed: %ld\\n", PTR_ERR\(fp\)\);\n(\s*)return;/pr_err("save_allow_list create file failed: %ld\\n", PTR_ERR(fp));\n$1revert_creds(saved);\n$1return;/g' KernelSU/kernel/policy/allowlist.c
-                    #perl -0pi -e 's/#if LINUX_VERSION_CODE >= KERNEL_VERSION\(3, 5, 0\)\n(\s*struct task_struct \*tsk;)/#if 0\n$1/' KernelSU/kernel/compat/kernel_compat.c
                 fi
             fi
             echo "::endgroup::"
@@ -604,40 +601,6 @@ runs:
       with:
         name: Anykernel3-flasher
         path: build/*
-        if-no-files-found: error
-        overwrite: true
-
-    - id: upload-debug
-      if: inputs.release == 'false'
-      uses: actions/upload-artifact@v6
-      with:
-        name: kernel-debug-files
-        path: |
-          kernel/${{ inputs.kernel-dir }}/out/vmlinux
-          kernel/${{ inputs.kernel-dir }}/out/System.map
-          kernel/${{ inputs.kernel-dir }}/out/.config
-        if-no-files-found: error
-        overwrite: true
-
-    - id: upload-patched-source
-      if: inputs.release == 'false'
-      uses: actions/upload-artifact@v6
-      with:
-        name: patched-source
-        path: |
-          kernel/${{ inputs.kernel-dir }}/fs/exec.c
-          kernel/${{ inputs.kernel-dir }}/fs/open.c
-          kernel/${{ inputs.kernel-dir }}/fs/read_write.c
-          kernel/${{ inputs.kernel-dir }}/fs/stat.c
-          kernel/${{ inputs.kernel-dir }}/fs/namei.c
-          kernel/${{ inputs.kernel-dir }}/fs/namespace.c
-          kernel/${{ inputs.kernel-dir }}/drivers/input/input.c
-          kernel/${{ inputs.kernel-dir }}/security/security.c
-          kernel/${{ inputs.kernel-dir }}/security/selinux/hooks.c
-          kernel/${{ inputs.kernel-dir }}/security/selinux/ss/services.c
-          kernel/${{ inputs.kernel-dir }}/kernel/reboot.c
-          kernel/${{ inputs.kernel-dir }}/kernel/sys.c
-          kernel/${{ inputs.kernel-dir }}/include/linux/seccomp.h
         if-no-files-found: error
         overwrite: true
 
